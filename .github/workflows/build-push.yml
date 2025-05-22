@@ -54,6 +54,7 @@ jobs:
             return nextVersion;
         env:
           INPUT_SHA: ${{ env.INPUT_SHA }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Write version to files
       #   run: |
