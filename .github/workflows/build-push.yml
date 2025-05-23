@@ -27,16 +27,8 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DISTRIBUTION }}
 
-      # - name: Install startappz-github-actions
-      #   uses: actions/checkout@v4
-      #   with:
-      #     repository: Startappz/startappz-github-actions
-      #     ref: main
-      #     path: .startappz-github-actions
-      #     token: ${{ secrets.BRANCHLET_ACCESS_TOKEN_PUBLIC }}
-
-      - name: Install dependencies
-        run: npm ci
+      - name: Install Semantic Release
+        run: npm install semantic-release semantic-release-gha-output --no-save
 
       - name: Add INPUT_SHA env var
         run: |
@@ -54,6 +46,9 @@ jobs:
           echo ${{ steps.semantic-release.outputs.tag }}
           echo ${{ steps.semantic-release.outputs.version }}
           echo ${{ steps.semantic-release.outputs.published }}
+
+      - name: Install dependencies
+        run: npm ci
 
       # - name: Get next release version
       #   run: |
@@ -82,5 +77,4 @@ jobs:
       # - name: Write version to files
       #   run: |
       #     ./deployment/write-versions.sh ${{ steps.next-version.outputs.result }}
-
 #npx semantic-release --dry-run --plugins "@semantic-release/commit-analyzer,@semantic-release/release-notes-generator,@semantic-release/github,semantic-release-gha-output"
