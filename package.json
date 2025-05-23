@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/moski/demo-next-version/issues"
   },
-  "homepage": "https://github.com/moski/demo-next-version#readme"
+  "homepage": "https://github.com/moski/demo-next-version#readme",
+  "devDependencies": {
+    "semantic-release": "^24.2.4",
+    "semantic-release-gha-output": "^1.1.2"
+  }
 }
