@@ -47,34 +47,16 @@ jobs:
           echo ${{ steps.semantic-release.outputs.version }}
           echo ${{ steps.semantic-release.outputs.published }}
 
+      - name: Release failed
+        if: steps.semantic-release.outputs.version == ''
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.setFailed('Release failed')
+
+      - name: Write version to files
+        run: |
+          ./deployment/write-versions.sh ${{ steps.semantic-release.outputs.version }}
+
       - name: Install dependencies
         run: npm ci
-
-      # - name: Get next release version
-      #   run: |
-      #     npx semantic-release --dry-run --plugins "@semantic-release/commit-analyzer,@semantic-release/release-notes-generator,@semantic-release/github,semantic-release-gha-output"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Get next release version
-      #   uses: actions/github-script@v7
-      #   id: next-version
-      #   with:
-      #     result-encoding: string
-      #     script: |
-      #       const getNextVersion = require('./.startappz-github-actions/custom-scripts/next-version');
-      #       const nextVersion = await getNextVersion({
-      #         core,
-      #         github,
-      #         context,
-      #         sha: process.env.INPUT_SHA,
-      #       });
-      #       return nextVersion;
-      #   env:
-      #     INPUT_SHA: ${{ env.INPUT_SHA }}
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Write version to files
-      #   run: |
-      #     ./deployment/write-versions.sh ${{ steps.next-version.outputs.result }}
-#npx semantic-release --dry-run --plugins "@semantic-release/commit-analyzer,@semantic-release/release-notes-generator,@semantic-release/github,semantic-release-gha-output"
