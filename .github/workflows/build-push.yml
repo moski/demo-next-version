@@ -2,7 +2,7 @@ name: Build and Push
 on: push
 
 env:
-  NODE_VERSION: 18
+  NODE_VERSION: 20.17.0
   JAVA_VERSION: 11
   JAVA_DISTRIBUTION: "adopt"
 
