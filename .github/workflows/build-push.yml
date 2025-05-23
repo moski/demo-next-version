@@ -8,6 +8,8 @@ env:
 
 jobs:
   build-push:
+    permissions:
+      contents: write
     name: run tests, build and push
     runs-on: ubuntu-latest
     steps:
