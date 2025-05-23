@@ -33,6 +33,9 @@ jobs:
       #     path: .startappz-github-actions
       #     token: ${{ secrets.BRANCHLET_ACCESS_TOKEN_PUBLIC }}
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Add INPUT_SHA env var
         run: |
           export INPUT_SHA=$(git rev-parse ${{ github.ref }})
